@@ -4,6 +4,7 @@
     "sessionDb": "./sessions.db",
     "zncpath": "~/.znc",
     "trustProxy": 2,
+    "useGlobalLog": true,
     "allowRegexSearch": true,
     "reCAPTCHA": {
         "enabled": false,

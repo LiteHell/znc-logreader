@@ -1,6 +1,7 @@
 const express = require('express'),
     Reader = require('../zncreader'),
-    reader = new Reader(require('../config.json').zncpath),
+    config = require('../config.json'),
+    reader = new Reader(config.zncpath, config.useGlobalLog),
     wrapAsync = require('express-async-wrap');
 
 module.exports = (prefix) => {

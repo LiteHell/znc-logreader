@@ -1,7 +1,8 @@
 const express = require('express'),
     Reader = require('../zncreader'),
-    reader = new Reader(require('../config.json').zncpath),
-    regexSearchAllowed = require('../config.json').allowRegexSearch,
+    config = require('../config.json'),
+    reader = new Reader(config.zncpath, config.useGlobalLog),
+    regexSearchAllowed = config.allowRegexSearch,
     wrapAsync = require('express-async-wrap');
 
 module.exports = prefix => {
