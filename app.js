@@ -37,6 +37,10 @@ app.use('/log', authenticateReq);
 app.use('/log', require('./routes/logRouter')('/log/'));
 app.use('/search', authenticateReq);
 app.use('/search', require('./routes/searchRouter')('/log/'));
+app.use((err, req, res, next) => {
+    res.status(500).render('error');
+    console.error(err);
+});
 
 auth.init(config).then(() => {
     console.log("database initialized");
