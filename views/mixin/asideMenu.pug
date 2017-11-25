@@ -1,0 +1,12 @@
+mixin asideMenu(menu)
+    //- only available to 2nd level
+    p.menu-label= menu.title
+    ul.menu-list
+        for i in menu.items
+            li
+                a(href=i.href, class={"is-active": i.active})= i.text
+                if(i.children)
+                    ul
+                        for j in i.children
+                            li
+                                a(href=j.href, class={"is-active": j.active})= j.text

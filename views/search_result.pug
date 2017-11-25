@@ -1,0 +1,15 @@
+include mixin/ircrow.pug
+
+h1.title Seach result
+h2.subtitle Search result of #{network} network
+- var makeLink = (network, channel, datetime) => "/log/" + [network,channel ? channel : "",datetime ? datetime : ""].filter(v => v != "").map(encodeURIComponent).join("/");
+for datetimes, channel in result
+    for datetime in datetimes
+        h3.title.is-5
+            a(href=makeLink(network, channel))= channel
+        h4.subtitle.is-6
+            a(href=makeLink(network, channel, datetime.datetime))= datetime.datetime
+        for row in datetime.result
+            +ircrow(row)
+        hr
+script(src="/irclog.js")

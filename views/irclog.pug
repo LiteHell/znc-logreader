@@ -1,0 +1,29 @@
+extends layout_with_navbar.pug
+include mixin/ircrow.pug
+include mixin/asideMenu.pug
+
+block head
+    title Log - #{channel} (#{network}) on #{datetime}
+    link(href="/irclog.css", rel="stylesheet")
+    script(src="/colorHash.js")
+    script(src="/irclog.js", defer)
+
+block afterNavbar
+    .columns
+        .column.is-one-fifth
+            section.section
+                aside.menu
+                    p.menu-label Actions
+                    ul.menu-list
+                        a(href="../") Go Back
+                        a(href="/logout") Logout
+                    for i in asideMenus
+                        +asideMenu(i)
+        .column
+            section.section
+                h1.title Log of #{channel}, #{network}
+                h2.subtitle Logged on #{datetime}
+                ul
+                    for i in log
+                        +ircrow(i)
+

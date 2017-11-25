@@ -1,0 +1,53 @@
+mixin ircrow(i)
+    - var formatWhen = (when) => `[${when.hours}:${when.minutes}:${when.seconds}]`
+    if i.type == "parse_failed"
+        .parseFailed.irc-row
+            if(i.when)
+                time.timestamp= formatWhen(i.when)
+            else
+                time.timestamp ??:??:??
+            .nick.sys
+            .text= i.text
+    else if i.type == "message"
+        .irc-message.irc-row
+            time.timestamp= formatWhen(i.when)
+            .nick.colorable= i.nickname
+            .text= i.text
+    else if i.type == "join"
+        .irc-join.irc-row
+            time.timestamp= formatWhen(i.when)
+            .nick.sys
+            .text #[span.colorable= i.nickname](#{i.hostname})님이 들어왔습니다.
+    else if i.type == "quit"
+        .irc-quit.irc-row
+            time.timestamp= formatWhen(i.when)
+            .nick.sys
+            .text #[span.colorable= i.nickname](#{i.hostname})님이 들어왔습니다. (이유 : #{i.reason})
+    else if i.type == "part"
+        .irc-part.irc-row
+            time.timestamp= formatWhen(i.when)
+            .nick.sys
+            .text #[span.colorable= i.nickname](#{i.hostname})님이 들어왔습니다. (이유 : #{i.reason})
+    else if i.type == "mode"
+        .irc-mode.irc-row
+            time.timestamp= formatWhen(i.when)
+            .nick.sys
+            if(i.target)
+                .text #[span.colorable= i.setter]가 #[span.colorable= i.target]의 모드를 #{i.mode}로 변경했습니다.
+            else
+                .text #[span.colorable= i.setter]가 모드를 #{i.mode}로 변경했습니다.
+    else if i.type == "topic"
+        .irc-topic.irc-row
+            time.timestamp= formatWhen(i.when)
+            .nick.sys
+            .text #[span.colorable= i.setter]가 주제를 다음과 같이 바꿨습니다: #{i.topic}
+    else if i.type == "kick"
+        .irc-kick.irc-row
+            time.timestamp= formatWhen(i.when)
+            .nick.sys
+            .text #[span.colorable= i.kicker]가 #[span.colorable= i.kicked]를 킥했습니다. (이유 : #{i.reason})
+    else if i.type == "special"
+        .irc-special.irc-row
+            time.timestamp= formatWhen(i.when)
+            .nick.sys
+            .text= i.text

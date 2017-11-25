@@ -1,0 +1,47 @@
+extends layout_with_navbar.pug
+
+block head
+    title Search IRC log
+    link(href="/irclog.css", rel="stylesheet")
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+    script(src="/search.js")
+
+block afterNavbar
+    section.section
+        form(action="/search", method="POST")
+            .field
+                label.label Network
+                .control
+                    .select
+                        select(name="network")
+                            for i in networks
+                                option(value=i)= i
+                p.help This must be selected.
+            .field
+                label.label Channel
+                .control
+                    input.input(type="text", name="channels")
+                p.help This must be seperated with comma(,) and empty means every channels.
+            .field.has-addons
+                label.label Query
+                p.control
+                    span.select
+                        select(name="filterType")
+                            option(value="nickname") nickname
+                            option(value="message") message
+                            option(value="nickAndMsg") both
+                p.control
+                    input.input(type="text", name="query", placeholder="Enter query here")
+            .field
+                label.label RegExp Search
+                .control
+                    .radio
+                        label.radio
+                            input(type="radio", value="true", name="regex")
+                            | Yes
+                        label.radio
+                            input(type="radio", value="false", name="regex", checked)
+                            | No
+                p.help Please note that this can be ignored by server administrator, and regex search is unstable.
+            button.button(type="button")#searchBtn Search
+            

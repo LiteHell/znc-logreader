@@ -1,0 +1,21 @@
+.irc-row {
+    display: table-row;
+}
+.nick, time.timestamp, .text {
+    display: table-cell;
+    padding: 0px 3px;
+}
+.nick:not(.sys):before {
+    content: "<"
+}
+.nick:not(.sys):after {
+    content: ">"
+}
+time.timestamp {
+    color: orangered;
+}
+.nick {
+    word-break: keep-all;
+    white-space: nowrap;
+    text-align: right;
+}

@@ -1,0 +1,44 @@
+extends layout.pug
+
+block head
+    title Login
+
+block body
+    section.section
+        h1.title Login
+        h2.subtitle Please login
+        if wrong
+            article.message.is-danger
+                .message-body #{reason ? reason : "Incorrect ID or password"}
+        if reCAPTCHA.enabled
+            script(src="https://www.google.com/recaptcha/api.js", async, defer)
+            script= "function onSubmit(){document.querySelector('#loginForm').submit();}"
+        form(action="/login", method="POST")#loginForm
+            .field.is-horizontal
+                .field-label.is-normal
+                    label.label ID
+                .field-body
+                    .field
+                        .control
+                            input.input(type="text", name="id", placeholder="Enter ID")
+            .field.is-horizontal
+                .field-label.is-normal
+                    label.label Password
+                .field-body
+                    .field
+                        .control
+                            input.input(type="password", name="password", placeholder="Enter Password")
+            if reCAPTCHA.enabled
+                .field.is-horizontal
+                    .field-label
+                    .field-body
+                        .field
+                            .control
+                                button.button.g-recaptcha(data-sitekey=reCAPTCHA.sitekey, data-callback="onSubmit") Login
+            else
+                .field.is-horizontal
+                    .field-label
+                    .field-body
+                        .field
+                            .control
+                                button.button(type="submit") Login

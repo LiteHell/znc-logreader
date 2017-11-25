@@ -1,0 +1,27 @@
+extends layout_with_navbar.pug
+include mixin/asideMenu.pug
+
+mixin mainSection
+    section.section
+        h1.title #{list.name}
+        h2.subtitle #{list.description || "Select one or go back"}
+        ul
+            for i in list.items
+                li
+                    a(href=i.href)= i.text
+
+block head
+    title List - #{list.name}
+
+block afterNavbar
+    if asideMenus
+        .columns
+            .column.is-one-fifth
+                section.section
+                    aside.menu
+                        for i in asideMenus
+                            +asideMenu(i)
+            .column
+                +mainSection
+    else
+        +mainSection

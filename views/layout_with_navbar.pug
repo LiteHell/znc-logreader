@@ -1,0 +1,21 @@
+extends layout.pug
+
+block body
+    block beforeNavbar
+    nav.navbar.is-dark
+        .navbar-brand
+            a.navbar-item(href="/") ZNC Logs
+            button.button.navbar-burger
+                span
+                span
+                span
+        .navbar-menu
+            .navbar-start
+                .navbar-item
+                    a(href="/log") Logs
+                .navbar-item
+                    a(href="/search") Search
+            .navbar-end
+                .navbar-item
+                    a(href="/logout") Logout
+    block afterNavbar

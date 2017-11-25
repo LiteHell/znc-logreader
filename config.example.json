@@ -1,0 +1,13 @@
+{
+    "port": 1577,
+    "authDb": "./accounts.db",
+    "sessionDb": "./sessions.db",
+    "zncpath": "~/.znc",
+    "trustProxy": 2,
+    "allowRegexSearch": true,
+    "reCAPTCHA": {
+        "enabled": false,
+        "sitekey": "example",
+        "secret": "example"
+    }
+}

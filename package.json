@@ -1,0 +1,25 @@
+{
+  "name": "znc-logreader",
+  "version": "1.0.0",
+  "description": "znc log reader for my personal use",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "node ./app.js",
+    "maintenance": "node ./maintenance.js"
+  },
+  "author": "LiteHell",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "async": "^2.6.0",
+    "bcryptjs": "^2.4.3",
+    "bulma": "^0.6.1",
+    "connect-sqlite3": "^0.9.10",
+    "express": "^4.16.2",
+    "express-async-wrap": "^1.0.0",
+    "express-session": "^1.15.6",
+    "pug": "^2.0.0-rc.4",
+    "request": "^2.83.0",
+    "sqlite3": "^3.1.13"
+  }
+}
