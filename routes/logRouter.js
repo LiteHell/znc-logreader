@@ -6,6 +6,18 @@ const express = require('express'),
 
 module.exports = (prefix) => {
     let makeLink = (network, channel, datetime) => prefix + [network,channel ? channel : "",datetime ? datetime : ""].filter(v => v != "").map(encodeURIComponent).join("/");
+    let validateSelecteds = (userId, selected) => {
+        let networks = await reader.getNetworks(userId);
+        if(selected.network && !networks.includes(selected.network))
+            return false;
+        let channels = await reader.getChannels(userId, selected.network);
+        if(selected.channel && !channels.includes(selected.channel))
+            return false;
+        let datetimes = await reader.getDatetimes(userId, selected.network, selected.datetime);
+        if(selected.datetime && !datetimes.includes(selected.datetime))
+            return false;
+        return true;
+    };
     async function makeNetAsideMenu(userId, network, selected = {
         network: null
     }) {
@@ -57,6 +69,7 @@ module.exports = (prefix) => {
             },
             asideMenus: [{
                 title: "Networks",
+                hideOnMobile: true,
                 items: await makeNetAsideMenu(userId)
             }]
         });
@@ -66,6 +79,8 @@ module.exports = (prefix) => {
                 network: req.params.network
             },
             userId = req.session.userId
+        if(!validateSelecteds(userId, selected))
+            return res.redirect('../')
         let channels = await reader.getChannels(userId, selected.network);
         let channelLinks = channels.map((v) => {
             return {
@@ -81,6 +96,7 @@ module.exports = (prefix) => {
             },
             asideMenus: [{
                 title: "Networks",
+                hideOnMobile: true,
                 items: await makeNetChanAsideMenu(userId, selected.network, selected)
             }]
         });
@@ -91,6 +107,8 @@ module.exports = (prefix) => {
                 channel: req.params.channel
             },
             userId = req.session.userId;
+        if(!validateSelecteds(userId, selected))
+            return res.redirect('../')
         let datetimes = await reader.getDatetimes(userId, selected.network, selected.channel);
         let logLinks = datetimes.map((v) => {
             return {
@@ -106,10 +124,12 @@ module.exports = (prefix) => {
             },
             asideMenus: [{
                     title: "Networks",
+                    hideOnMobile: true,
                     items: await makeNetChanAsideMenu(userId, selected.network, selected)
                 },
                 {
                     title: "Datetimes",
+                    hideOnMobile: true,
                     items: logLinks
                 }
             ]
@@ -122,6 +142,8 @@ module.exports = (prefix) => {
                 datetime: req.params.datetime
             },
             userId = req.session.userId;
+        if(!validateSelecteds(userId, selected))
+            return res.redirect('../')
         let rawLog = await reader.readLog(userId, selected.network, selected.channel, selected.datetime);
         let logEntries = await reader.parseLog(rawLog);
         let datetimes = await reader.getDatetimes(userId, selected.network, selected.channel);
@@ -136,9 +158,11 @@ module.exports = (prefix) => {
             datetime: selected.datetime,
             asideMenus: [{
                 title: "Datetimes",
+                hideOnMobile: true,
                 items: datetimeLinks
             }, {
                 title: "Networks",
+                hideOnMobile: true,
                 items: await makeNetChanAsideMenu(userId, selected.network, selected)
             }],
             log: logEntries

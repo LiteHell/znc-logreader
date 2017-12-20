@@ -4,7 +4,7 @@ mixin asideMenu(menu)
     ul.menu-list
         for i in menu.items
             li
-                a(href=i.href, class={"is-active": i.active})= i.text
+                a(href=i.href, class={"is-active": i.active, " is-hidden-touch": i.hideOnMobile})= i.text
                 if(i.children)
                     ul
                         for j in i.children
