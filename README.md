@@ -7,6 +7,11 @@ Web irc log reader, made for znc users.
 1. Run `npm i`
 1. Run `npm run start`
 
+## Add/Managed account
+1. Run `npm run maintenance`
+1. Maintenance script is very kindly. Do what you want.
+Please note that znc-logreader password is different with znc password.
+
 ## reCAPTCHA
 You can use Google Invisible reCAPTCHA by editing `config.json`.
 
