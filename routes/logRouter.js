@@ -6,7 +6,7 @@ const express = require('express'),
 
 module.exports = (prefix) => {
     let makeLink = (network, channel, datetime) => prefix + [network,channel ? channel : "",datetime ? datetime : ""].filter(v => v != "").map(encodeURIComponent).join("/");
-    let validateSelecteds = (userId, selected) => {
+    async function validateSelecteds (userId, selected) {
         let networks = await reader.getNetworks(userId);
         if(selected.network && !networks.includes(selected.network))
             return false;
