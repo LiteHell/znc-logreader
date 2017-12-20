@@ -1,10 +1,10 @@
 mixin asideMenu(menu)
     //- only available to 2nd level
-    p.menu-label= menu.title
-    ul.menu-list
+    p.menu-label(class={"is-hidden-touch": menu.hideOnMobile})= menu.title
+    ul.menu-list(class={"is-hidden-touch": menu.hideOnMobile})
         for i in menu.items
             li
-                a(href=i.href, class={"is-active": i.active, " is-hidden-touch": i.hideOnMobile})= i.text
+                a(href=i.href, class={"is-active": i.active})= i.text
                 if(i.children)
                     ul
                         for j in i.children
