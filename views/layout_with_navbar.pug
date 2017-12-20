@@ -5,11 +5,11 @@ block body
     nav.navbar.is-dark
         .navbar-brand
             a.navbar-item(href="/") ZNC Logs
-            button.button.navbar-burger
+            button.button.navbar-burger.is-dark(data-target="mainNavbar")
                 span
                 span
                 span
-        .navbar-menu
+        .navbar-menu#mainNavbar
             .navbar-start
                 .navbar-item
                     a(href="/log") Logs
