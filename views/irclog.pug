@@ -16,7 +16,7 @@ block afterNavbar
                     p.menu-label Actions
                     ul.menu-list
                         a(href="../") Go Back
-                        a(href="/logout") Logout
+                        a(href="/logout",onclick="return confirm('Are you sure you want to logout?')") Logout
                     for i in asideMenus
                         +asideMenu(i)
         .column

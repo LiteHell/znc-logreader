@@ -17,5 +17,5 @@ block body
                     a(href="/search") Search
             .navbar-end
                 .navbar-item
-                    a(href="/logout") Logout
+                    a(href="/logout",onclick="return confirm('Are you sure you want to logout?')") Logout
     block afterNavbar

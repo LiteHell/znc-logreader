@@ -7,6 +7,11 @@ Web irc log reader, made for znc users.
 1. Run `npm i`
 1. Run `npm run start`
 
+## Change secret key and database name
+1. Open app.js file to **source code** editor. (ex: Notepad++)
+1. Go to line 16.
+1. Edit secret: 'value' and name: 'value'.
+
 ## Add/Manage account
 1. Run `npm run maintenance`
 1. Maintenance script is very kindly. Do what you want.
