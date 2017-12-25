@@ -22,12 +22,12 @@ mixin ircrow(i)
         .irc-quit.irc-row
             time.timestamp= formatWhen(i.when)
             .nick.sys
-            .text #[span.colorable= i.nickname](#{i.hostname})님이 들어왔습니다. (이유 : #{i.reason})
+            .text #[span.colorable= i.nickname](#{i.hostname})님이 서버에서 나갔습니다. (이유 : #{i.reason})
     else if i.type == "part"
         .irc-part.irc-row
             time.timestamp= formatWhen(i.when)
             .nick.sys
-            .text #[span.colorable= i.nickname](#{i.hostname})님이 나갔습니다. (이유 : #{i.reason})
+            .text #[span.colorable= i.nickname](#{i.hostname})님이 방에서 나갔습니다. (이유 : #{i.reason})
     else if i.type == "mode"
         .irc-mode.irc-row
             time.timestamp= formatWhen(i.when)
