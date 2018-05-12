@@ -16,7 +16,7 @@ function getDirectories(dir) {
 }
 
 function ZncReader(zncpath, useGlobalModdata) {
-    let getModDataPath = (user) => path.join(zncpath, useGlobalModdata ? "/moddata/log/" + user.toLowerCase() : "/users/" + user + "/moddata/log");
+    let getModDataPath = (user) => path.join(zncpath, useGlobalModdata ? "/moddata/log/" + user : "/users/" + user + "/moddata/log");
     this.getNetworks = (username) => getDirectories(getModDataPath(username));
     this.getChannels = (username, network) => getDirectories(path.join(getModDataPath(username), network));
     this.getDatetimes = (username, network, channel) => {

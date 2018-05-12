@@ -14,14 +14,14 @@ app.set('view engine', 'pug');
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bulma/css'))); // bulma css
 app.use(express.static('./static'));
 app.use(session({
-    secret: '4U2d9tKq2azV2llMxOI9S4AsaEQ5KdkeUIM5Pi47S4Sk6oAFauVls000nALF1XXCsHbTPUM4m3zbpJwnRZCjZHUCnlCSJc5VfegP',
+    secret: config.secretKey,
     cookie: {
         httpOnly: true
     },
     store: new SqliteStore({table: 'sessions', db: config.sessionDb}),
     saveUninitialized: false,
     resave: true,
-    name: 'LiteHellInTheHell'
+    name: config.sessionName
 }))
 
 // authentication routes

@@ -10,5 +10,7 @@
         "enabled": false,
         "sitekey": "example",
         "secret": "example"
-    }
+    },
+    "secretKey": "example",
+    "sessionName": "example"
 }
