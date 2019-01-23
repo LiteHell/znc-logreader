@@ -1,8 +1,20 @@
 const express = require('express'),
+      ldap = require('ldapjs'),
       config = require('../config.json'),
       request = require('request');
-module.exports = (auth) => {
+module.exports = () => {
     var routes = {};
+    let ldapClient = ldap.createClient({
+      url: config.ldap.url
+    });
+    let tryLdapBind = (dn, password) => {
+        return new Promise((resolve) => {
+            ldapClient.bind(dn, password, (err) => {
+                if (err) return resolve(false);
+                return resolve(true);
+            })
+        })
+    }
     // authentication
     routes.indexPage = (req, res) => {
         if (!req.session.userId) {
@@ -27,7 +39,7 @@ module.exports = (auth) => {
                 reCAPTCHA: config.reCAPTCHA
             });
         function doMatch(){ 
-            auth.matchPassword(req.body.id, req.body.password)
+            tryLdapBind(config.ldap.dn.replace(/%u/gi, req.body.id), req.body.password)
                 .then((matched) => {
                     if (matched) {
                         req.session.userId = req.body.id;

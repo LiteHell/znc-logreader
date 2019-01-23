@@ -4,18 +4,16 @@ Web irc log reader, made for znc users.
 ## Installation
 1. Copy `config.example.json` to `config.json`
 1. Edit `config.json`
+1. Run necessary one of following.
+   * `npm install pg pg-hstore`
+   * `npm install mysql2`
+   * `npm install sqlite3`
+   * `npm install tedious` (MSSQL)
 1. Run `npm i`
 1. Run `npm run start`
 
-## Change secret key and database name
-1. Open app.js file to **source code** editor. (ex: Notepad++)
-1. Go to line 16.
-1. Edit secret: 'value' and name: 'value'.
-
 ## Add/Manage account
-1. Run `npm run maintenance`
-1. Maintenance script is very kindly. Do what you want.
-Please note that znc-logreader password is different with znc password.
+Use LDAP. `%u` in dn is replaced with id.
 
 ## reCAPTCHA
 You can use Google Invisible reCAPTCHA by editing `config.json`.

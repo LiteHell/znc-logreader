@@ -13,6 +13,7 @@ module.exports = prefix => {
             networks: await reader.getNetworks(req.session.userId)
         });
     }));
+    router.get('/result', (req, res) => res.redirect('/search'));
     router.post('/', express.urlencoded({extended: false}), wrapAsync(async (req, res) => {
         let userId = req.session.userId, network = req.body.network;
         let channels = await reader.getChannels(userId, network)

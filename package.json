@@ -14,12 +14,14 @@
     "async": "^2.6.0",
     "bcryptjs": "^2.4.3",
     "bulma": "^0.6.1",
-    "connect-sqlite3": "^0.9.10",
+    "connect-session-sequelize": "^6.0.0",
     "express": "^4.16.2",
     "express-async-wrap": "^1.0.0",
     "express-session": "^1.15.6",
+    "ldapjs": "^1.0.2",
     "pug": "^2.0.0-rc.4",
     "request": "^2.83.0",
-    "sqlite3": "^3.1.13"
+    "sequelize": "^4.42.0",
+    "sqlite3": "^4.0.6"
   }
 }

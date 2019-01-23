@@ -1,8 +1,8 @@
 const express = require('express'),
       session = require('express-session'),
-      SqliteStore = require('connect-sqlite3')(session),
+      Sequelize = require('sequelize'),
+      SequelizeStore = require('connect-session-sequelize')(session.Store),
       config = require('./config.json'),
-      auth = require('./auth'),
       path = require('path')
       app = express();
 
@@ -11,6 +11,8 @@ if (config.trustProxy)
 app.set('views', './views');
 app.set('view engine', 'pug');
 
+let sequelize = new Sequelize(config.sessionDbConnectionUrl);
+
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bulma/css'))); // bulma css
 app.use(express.static('./static'));
 app.use(session({
@@ -18,14 +20,15 @@ app.use(session({
     cookie: {
         httpOnly: true
     },
-    store: new SqliteStore({table: 'sessions', db: config.sessionDb}),
+    store: new SequelizeStore({db: sequelize}),
     saveUninitialized: false,
     resave: true,
     name: config.sessionName
 }))
+sequelize.sync();
 
 // authentication routes
-const {loginGet, loginPost, indexPage, logout} = require('./routes/authRoutes')(auth);
+const {loginGet, loginPost, indexPage, logout} = require('./routes/authRoutes')();
 app.get('/login', loginGet);
 app.post('/login', express.urlencoded({extended: false}), loginPost);
 app.get('/', indexPage);
@@ -42,9 +45,6 @@ app.use((err, req, res, next) => {
     console.error(err);
 });
 
-auth.init(config).then(() => {
-    console.log("database initialized");
-    app.listen(config.port, () => {
-        console.log('listening on ' + config.port);
-    });
-})
+app.listen(config.port, () => {
+    console.log('listening on ' + config.port);
+});

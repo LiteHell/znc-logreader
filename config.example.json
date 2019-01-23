@@ -1,7 +1,10 @@
 {
     "port": 1577,
-    "authDb": "./accounts.db",
-    "sessionDb": "./sessions.db",
+    "ldap": {
+        "url": "ldap://127.0.0.1:389",
+        "dn": "uid=%u,ou=exampleorg,dc=example,dc=org"
+    },
+    "sessionDbConnectionUrl": "sqlite:./sessions.db",
     "zncpath": "~/.znc",
     "trustProxy": 2,
     "useGlobalLog": true,

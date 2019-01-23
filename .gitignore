@@ -2,3 +2,5 @@ node_modules/
 accounts.db
 sessions.db
 config.json
+package-lock.json
+znc-debug
