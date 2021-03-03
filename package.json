@@ -19,7 +19,7 @@
     "express-async-wrap": "^1.0.0",
     "express-session": "^1.15.6",
     "ldapjs": "^1.0.2",
-    "pug": "^2.0.0-rc.4",
+    "pug": "^3.0.1",
     "request": "^2.83.0",
     "sequelize": "^5.15.1",
     "sqlite3": "^4.0.6"
